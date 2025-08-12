@@ -1,5 +1,5 @@
 resource "aws_route53_record" "expense" { #aws r53 terraform
-  count = length(var.instances)         # functions in terraform, collection functions, length
+  count = length(var.instances)           # functions in terraform, collection functions, length
   #   count = 3
   zone_id         = var.zone_id
   name            = "${var.instances[count.index]}.${var.domain_name}" #interpolation

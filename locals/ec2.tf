@@ -1,23 +1,18 @@
-resource "aws_instance" "expense" { #terraform aws ec2
-  count = length(var.instances)     # functions in terraform, collection functions, length
-  #count = 3
-  ami                    = "ami-09c813fb71547fc4f" # this is our devops-practice AMI id
+resource "aws_instance" "web" {         #terraform aws ec2
+  ami                    = local.ami_id # this is our devops-practice AMI id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
-  instance_type          = "t3.micro"
-  tags = merge(
-    var.common_tags,
-    {
-      # Name    = "terraform-demo"
-      # purpose = "terraform-practice"
-      # Name = var.instances[count.index]   
-      Name = var.instances[count.index]
-    }
-  )
+  # instance_type          = "t3.micro"
+  instance_type = local.instance_type
+  tags = {
+    Name    = local.name
+    purpose = "terraform-practice"
+  }
 }
 
 
 resource "aws_security_group" "allow_tls" { #terraform aws security group
   name        = "allow_tls"
+  # name        = "allow_tls_changed"
   description = "Allow TLS inbound traffic and all outbound traffic"
   ingress {
     from_port   = 22
