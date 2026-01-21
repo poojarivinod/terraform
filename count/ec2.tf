@@ -1,7 +1,7 @@
 resource "aws_instance" "expense" { #terraform aws ec2
   count = length(var.instances)     # functions in terraform, collection functions, length
   #count = 3
-  ami                    = "ami-09c813fb71547fc4f" # this is our devops-practice AMI id
+  ami                    = "ami-0220d79f3f480ecf5" # this is our devops-practice AMI id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   instance_type          = "t3.micro"
   tags = merge(

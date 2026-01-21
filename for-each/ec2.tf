@@ -1,6 +1,6 @@
 resource "aws_instance" "web" {                    #terraform aws ec2
   for_each = var.instances # terraform will give us a variable called each # "for each in terraform"
-  ami                    = "ami-09c813fb71547fc4f" # this is our devops-practice AMI id
+  ami                    = "ami-0220d79f3f480ecf5" # this is our devops-practice AMI id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   instance_type          = each.value
   tags = {
